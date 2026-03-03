@@ -1,0 +1,130 @@
+@if (isSubmitting()) {
+  <app-page-loader />
+}
+
+<!-- ── Loading skeleton ───────────────────────────────────────────────────── -->
+@if (!config() && !configError()) {
+  <div class="flex items-center justify-center">
+    <app-mana-loader [size]="64" [label]="''"></app-mana-loader>
+  </div>
+}
+
+<!-- ── Config error ───────────────────────────────────────────────────────── -->
+@if (configError()) {
+  <div class="config-error" role="alert">
+    Unable to load registration settings. Please refresh and try again.
+  </div>
+}
+
+<!-- ── Registration form (shown once config has resolved) ─────────────────── -->
+@if (config() && form()) {
+  <form [formGroup]="form()!" (ngSubmit)="onSubmit()" novalidate>
+
+    <div class="form-title">Welcome</div>
+    <div class="text-[0.85rem] text-[var(--color-text-muted)] mb-7 font-light">
+      Create your account below
+    </div>
+
+    <!-- Username -->
+    <app-form-field
+      label="Username"
+      forId="username"
+      hint="Letters, numbers, _ and - only"
+      [error]="username.touched && username.errors
+        ? (username.errors['required']   ? 'Username is required'
+        : username.errors['minlength']   ? 'Must be at least 3 characters'
+        : username.errors['pattern']     ? 'Only letters, numbers, _ and - allowed' : '')
+        : ''"
+    >
+      <app-text-input
+        id="username"
+        formControlName="username"
+        placeholder="manauser"
+        icon="@"
+        [hasError]="username.invalid && username.touched"
+      />
+    </app-form-field>
+
+    <!-- Email -->
+    @if (showEmail()) {
+      <app-form-field
+        label="Email"
+        forId="email"
+        [error]="email!.touched && email!.errors
+          ? (email!.errors['required'] ? 'Email is required' : 'Please enter a valid email')
+          : ''"
+      >
+        <app-text-input
+          id="email"
+          formControlName="email"
+          type="email"
+          placeholder="you@example.com"
+          icon="✉"
+          [hasError]="email!.invalid && email!.touched"
+        />
+      </app-form-field>
+    }
+
+    @if (showPhoneNumber()) {
+      <ng-container formGroupName="phone">
+        <app-form-field
+          label="Phone Number"
+          forId="phone"
+          [error]="phone?.touched && phone?.errors
+            ? (phone?.errors?.['required'] ? 'Phone number is required' : 'Enter a valid phone number')
+            : ''"
+        >
+          <app-phone-input
+            id="phone"
+            formControlName="number"
+            [hasError]="(phone?.invalid ?? false) && (phone?.touched ?? false)"
+          />
+        </app-form-field>
+      </ng-container>
+    }
+
+    <!-- Password -->
+    <app-form-field
+      label="Password"
+      forId="password"
+      [error]="password.touched && password.errors
+        ? (password.errors['required']   ? 'Password is required'
+        : 'Must be at least 8 characters')
+        : ''"
+    >
+      <app-password-input
+        id="password"
+        formControlName="password"
+        [hasError]="password.invalid && password.touched"
+        [showStrength]="true"
+      />
+    </app-form-field>
+
+    <!-- Terms (commented out — preserved as-is) -->
+    <!--  <div class="mb-6">-->
+    <!--    <app-checkbox-->
+    <!--      id="acceptTerms"-->
+    <!--      formControlName="acceptTerms"-->
+    <!--    >-->
+    <!--      I agree to the <a routerLink="/terms">Terms of Service</a>-->
+    <!--      &amp; <a routerLink="/privacy">Privacy Policy</a>-->
+    <!--    </app-checkbox>-->
+    <!--  </div>-->
+
+    <app-button
+      type="submit"
+      variant="primary"
+      [fullWidth]="true"
+      [disabled]="form()!.invalid"
+      [loading]="isSubmitting()"
+    >
+      Create Account
+    </app-button>
+
+    <div class="text-center mt-5 text-[0.82rem] text-[var(--color-text-subtle)] card-footer">
+      Already have an account?
+      <a routerLink="/auth/login">Sign in</a>
+    </div>
+
+  </form>
+}

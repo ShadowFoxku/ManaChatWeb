@@ -1,0 +1,41 @@
+<div class="bg-scene">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+
+  <!-- Mana glyph rings -->
+  <div class="mana-ring mana-ring-1"></div>
+  <div class="mana-ring mana-ring-2"></div>
+  <div class="mana-ring mana-ring-3"></div>
+  <div class="mana-ring mana-ring-4"></div>
+
+  <div class="particles absolute inset-0 pointer-events-none" id="particles"></div>
+</div>
+
+<div class="relative z-10 flex items-center justify-center min-h-screen px-4">
+  <div class="card-wrap w-full max-w-[480px]">
+    <div class="card">
+
+      <!-- Brand logo -->
+      <div class="flex flex-col items-center gap-3 mb-8">
+        <div class="brand-logo-icon w-7 h-7 text-[var(--color-text-on-primary)] p-1.5">
+          <img alt="ManaChat Icon" src="icon.svg" />
+        </div>
+        <span class="brand-name">Mana<span>Chat</span></span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-0 bg-[var(--color-surface-raised)] rounded-md p-1 mb-8">
+        <a class="tab flex-1 py-2 text-center text-sm font-semibold tracking-wide rounded-md cursor-pointer transition-all duration-200 text-[var(--color-text-muted)] no-underline"
+           routerLink="login" routerLinkActive="active">Sign In</a>
+        <a class="tab flex-1 py-2 text-center text-sm font-semibold tracking-wide rounded-md cursor-pointer transition-all duration-200 text-[var(--color-text-muted)] no-underline"
+           routerLink="register" routerLinkActive="active">Create Account</a>
+      </div>
+
+      <!-- Routed form panel -->
+      <router-outlet />
+
+    </div>
+  </div>
+</div>

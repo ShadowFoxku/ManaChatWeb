@@ -1,0 +1,42 @@
+export type ThemeName = 'dark' | 'light' | 'custom';
+
+export interface ThemeTokens {
+  'color-bg': string;
+  'color-surface': string;
+  'color-surface-raised': string;
+  'color-surface-overlay': string;
+  'color-text': string;
+  'color-text-muted': string;
+  'color-text-subtle': string;
+  'color-primary': string;
+  'color-primary-hover': string;
+  'color-secondary': string;
+  'color-secondary-hover': string;
+  'color-accent': string;
+  'color-accent-hover': string;
+  'color-success': string;
+  'color-success-subtle': string;
+  'color-warning': string;
+  'color-warning-subtle': string;
+  'color-danger': string;
+  'color-danger-subtle': string;
+  'color-info': string;
+  'color-info-subtle': string;
+  'color-presence-online': string;
+  'color-presence-idle': string;
+  'color-presence-dnd': string;
+  'color-presence-offline': string;
+  'color-border': string;
+  'color-border-strong': string;
+  'color-focus-ring': string;
+  'color-input': string;
+  'color-scrollbar': string;
+  'color-scrollbar-thumb': string;
+  'color-text-on-primary': string;
+  'color-text-on-secondary': string;
+  'color-text-on-accent': string;
+  'color-text-on-success': string;
+  'color-text-on-warning': string;
+  'color-text-on-danger': string;
+  'color-text-on-info': string;
+}

@@ -1,0 +1,21 @@
+<div class="relative">
+  <input
+    [id]="id()"
+    [name]="name()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [autocomplete]="autocomplete()"
+    [disabled]="isDisabled"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+    class="peer field-input"
+    [class.field-input-icon]="icon()"
+    [class.field-input-error]="hasError()"
+  />
+  @if (icon()) {
+    <span class="field-icon peer-focus:text-primary" aria-hidden="true">
+      {{ icon() }}
+    </span>
+  }
+</div>

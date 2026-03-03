@@ -1,0 +1,25 @@
+<div
+  class="flex items-center gap-2.5 cursor-pointer select-none"
+  [class.opacity-50]="isDisabled"
+  [class.cursor-not-allowed]="isDisabled"
+  (click)="toggle()"
+>
+  <div
+    class="check-box"
+    [class.check-box-checked]="checked"
+    role="checkbox"
+    [attr.aria-checked]="checked"
+    [id]="id()"
+  >
+    @if (checked) {
+      <span class="check-mark" aria-hidden="true">✓</span>
+    }
+  </div>
+  <label [for]="id()" class="check-label" (click)="$event.preventDefault()">
+    @if (label()) {
+      {{ label() }}
+    } @else {
+      <ng-content />
+    }
+  </label>
+</div>

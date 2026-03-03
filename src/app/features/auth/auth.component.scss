@@ -1,0 +1,240 @@
+/* ── Host ── */
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ── Background scene ── */
+.bg-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 50%, #1a3d2b55 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 85% 20%, #0f2e1e66 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 70% 80%, #0f2e3d33 0%, transparent 50%),
+      var(--color-bg);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 10%;
+    right: 10%;
+    height: 50%;
+    background: radial-gradient(ellipse at 50% 0%, #2db89118 0%, transparent 70%);
+    filter: blur(40px);
+  }
+}
+
+/* ── Mana glyph rings ── */
+.mana-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
+  opacity: 0;
+  pointer-events: none;
+  animation: mana-pulse 8s ease-in-out infinite;
+}
+
+.mana-ring-1 {
+  width: 320px;
+  height: 320px;
+  top: 20%;
+  left: 8%;
+  animation-delay: 0s;
+  opacity: 0.11;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px dashed var(--color-primary);
+    opacity: 0.5;
+    animation: spin-slow 40s linear infinite;
+  }
+}
+
+.mana-ring-2 {
+  width: 180px;
+  height: 180px;
+  top: 55%;
+  left: 25%;
+  animation-delay: 2.5s;
+  opacity: 0.1;
+}
+
+.mana-ring-3 {
+  width: 80px;
+  height: 80px;
+  top: 35%;
+  left: 85%;
+  animation-delay: 5s;
+  opacity: 0.12;
+  border-style: dashed;
+  animation: spin-slow 25s linear infinite, mana-pulse 8s 5s ease-in-out infinite;
+}
+
+.mana-ring-4 {
+  width: 300px;
+  height: 300px;
+  top: 55%;
+  left: 75%;
+  animation-delay: 7.5s;
+  opacity: 0.13;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border-radius: 50%;
+    border: 1px dashed var(--color-primary);
+    opacity: 0.5;
+    animation: spin-slow 40s linear infinite;
+  }
+}
+
+@keyframes mana-pulse {
+  0%, 100% { transform: scale(1);     opacity: 0.06; }
+  50%      { transform: scale(1.1);   opacity: 0.12; }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Blobs ── */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.blob-1 {
+  width: 500px; height: 500px;
+  background: #2db891;
+  top: -100px; left: -150px;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.blob-2 {
+  width: 350px; height: 350px;
+  background: #3dbe7a;
+  bottom: -80px; right: 10%;
+  animation: drift 22s ease-in-out infinite alternate-reverse;
+}
+
+.blob-3 {
+  width: 250px; height: 250px;
+  background: #e8734a;
+  top: 40%; right: -60px;
+  opacity: 0.1;
+  animation: drift 15s ease-in-out infinite alternate;
+}
+
+.blob-4 {
+  width: 200px; height: 200px;
+  background: #4ab3d4;
+  bottom: 15%; left: 5%;
+  opacity: 0.08;
+  animation: drift 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* ── Card wrap ── */
+.card-wrap {
+  animation: fade-in-up 0.7s 0.1s ease both;
+}
+
+/* ── Auth card ── */
+.card {
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow:
+    0 0 0 1px #2db89110,
+    0 32px 80px #00000080,
+    0 0 60px #2db89108;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.6;
+  }
+}
+
+/* ── Brand logo icon ── */
+.brand-logo-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--color-primary), #3dbe7a);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px #2db89144, 0 0 48px #2db89120;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 18px;
+    border: 1px solid #2db89140;
+    animation: mana-pulse 4s ease-in-out infinite;
+  }
+}
+
+/* ── Brand name ── */
+.brand-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+
+  span { color: var(--color-primary); }
+}
+
+/* ── Tab active state ── */
+.tab {
+  &.active {
+    background: var(--color-surface-overlay);
+    color: var(--color-primary);
+    box-shadow: 0 1px 6px #00000040;
+  }
+}
+
+/* ── Animations ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in-left {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

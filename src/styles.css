@@ -1,0 +1,399 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=DM+Sans:wght@400;500&family=DM+Mono&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Fonts */
+  --font-sans:               'Nunito', sans-serif;
+  --font-body:               'DM Sans', sans-serif;
+  --font-mono:               'DM Mono', monospace;
+
+  /* Backgrounds */
+  --color-bg:                initial;
+  --color-surface:           initial;
+  --color-surface-raised:    initial;
+  --color-surface-overlay:   initial;
+
+  /* Text */
+  --color-text:              initial;
+  --color-text-muted:        initial;
+  --color-text-subtle:       initial;
+
+  /* Brand */
+  --color-primary:           initial;
+  --color-primary-hover:     initial;
+  --color-secondary:         initial;
+  --color-secondary-hover:   initial;
+
+  /* Accent */
+  --color-accent:            initial;
+  --color-accent-hover:      initial;
+
+  /* Status */
+  --color-success:           initial;
+  --color-success-subtle:    initial;
+  --color-warning:           initial;
+  --color-warning-subtle:    initial;
+  --color-danger:            initial;
+  --color-danger-subtle:     initial;
+  --color-info:              initial;
+  --color-info-subtle:       initial;
+
+  /* Presence */
+  --color-presence-online:   initial;
+  --color-presence-idle:     initial;
+  --color-presence-dnd:      initial;
+  --color-presence-offline:  initial;
+
+  /* Interactive */
+  --color-stroke:            initial;
+  --color-stroke-strong:     initial;
+  --color-focus-ring:        initial;
+  --color-input:             initial;
+  --color-scrollbar:         initial;
+  --color-scrollbar-thumb:   initial;
+
+  /* Text on color */
+  --color-text-on-primary:   initial;
+  --color-text-on-secondary: initial;
+  --color-text-on-accent:    initial;
+  --color-text-on-success:   initial;
+  --color-text-on-warning:   initial;
+  --color-text-on-danger:    initial;
+  --color-text-on-info:      initial;
+
+  /* Shared shadow */
+  --shadow-focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-focus-ring) 13%, transparent);
+}
+
+:root[data-theme="dark"] {
+  --color-bg:                #0f1412;
+  --color-surface:           #1a2120;
+  --color-surface-raised:    #232e2c;
+  --color-surface-overlay:   #2e3d3a;
+
+  --color-text:              #e8f0ee;
+  --color-text-muted:        #8fa89f;
+  --color-text-subtle:       #5e7870;
+
+  --color-primary:           #2db891;
+  --color-primary-hover:     #25a07d;
+  --color-secondary:         #3d5450;
+  --color-secondary-hover:   #4e6b66;
+
+  --color-accent:            #e8734a;
+  --color-accent-hover:      #d4613a;
+
+  --color-success:           #3dbe7a;
+  --color-success-subtle:    #1a3d2b;
+  --color-warning:           #f0b232;
+  --color-warning-subtle:    #3d2e0a;
+  --color-danger:            #e05252;
+  --color-danger-subtle:     #3d1616;
+  --color-info:              #4ab3d4;
+  --color-info-subtle:       #0f2e3d;
+
+  --color-presence-online:   #3dbe7a;
+  --color-presence-idle:     #f0b232;
+  --color-presence-dnd:      #e05252;
+  --color-presence-offline:  #5e7870;
+
+  --color-stroke:            #2e3d3a;
+  --color-stroke-strong:     #4e6b66;
+  --color-focus-ring:        #2db891;
+  --color-input:             #1a2120;
+  --color-scrollbar:         #232e2c;
+  --color-scrollbar-thumb:   #2e3d3a;
+
+  --color-text-on-primary:   #0f1412;
+  --color-text-on-secondary: #e8f0ee;
+  --color-text-on-accent:    #ffffff;
+  --color-text-on-success:   #0f1412;
+  --color-text-on-warning:   #0f1412;
+  --color-text-on-danger:    #ffffff;
+  --color-text-on-info:      #0f1412;
+}
+
+:root[data-theme="light"] {
+  --color-bg:                #f0f4f3;
+  --color-surface:           #ffffff;
+  --color-surface-raised:    #f7faf9;
+  --color-surface-overlay:   #e8f0ee;
+
+  --color-text:              #111a18;
+  --color-text-muted:        #4a6560;
+  --color-text-subtle:       #8fa89f;
+
+  --color-primary:           #1e9e7a;
+  --color-primary-hover:     #178566;
+  --color-secondary:         #ccddd9;
+  --color-secondary-hover:   #b8cecc;
+
+  --color-accent:            #c9522a;
+  --color-accent-hover:      #a8431f;
+
+  --color-success:           #1a9e5e;
+  --color-success-subtle:    #d4f0e2;
+  --color-warning:           #c47f00;
+  --color-warning-subtle:    #fef3d4;
+  --color-danger:            #c42b2b;
+  --color-danger-subtle:     #fde8e8;
+  --color-info:              #1a7fa8;
+  --color-info-subtle:       #d4eef7;
+
+  --color-presence-online:   #1a9e5e;
+  --color-presence-idle:     #c47f00;
+  --color-presence-dnd:      #c42b2b;
+  --color-presence-offline:  #8fa89f;
+
+  --color-stroke:            #cddbd7;
+  --color-stroke-strong:     #8fa89f;
+  --color-focus-ring:        #1e9e7a;
+  --color-input:             #ffffff;
+  --color-scrollbar:         #f7faf9;
+  --color-scrollbar-thumb:   #e8f0ee;
+
+  --color-text-on-primary:   #ffffff;
+  --color-text-on-secondary: #111a18;
+  --color-text-on-accent:    #ffffff;
+  --color-text-on-success:   #ffffff;
+  --color-text-on-warning:   #ffffff;
+  --color-text-on-danger:    #ffffff;
+  --color-text-on-info:      #ffffff;
+}
+
+/* =============================================================================
+   Base — global font defaults
+   ============================================================================= */
+
+@layer base {
+  body {
+    font-family: var(--font-body), sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans), sans-serif;
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-mono), monospace;
+  }
+}
+
+/* =============================================================================
+   Component primitives
+   ============================================================================= */
+
+@layer components {
+
+  /* ── Shared input chrome ─────────────────────────────────────────────────── */
+
+  .field-input {
+    @apply w-full rounded-lg text-sm outline-none transition-[border-color,box-shadow] duration-200;
+    padding: 0.7rem 0.9rem;
+    background: var(--color-input);
+    border: 1px solid var(--color-stroke);
+    color: var(--color-text);
+    font-family: var(--font-body), sans-serif;
+  }
+
+  .field-input::placeholder {
+    color: var(--color-text-subtle);
+  }
+
+  .field-input:focus {
+    border-color: var(--color-focus-ring);
+    box-shadow: var(--shadow-focus-ring);
+  }
+
+  .field-input:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+
+  /* Applied when a left icon is present */
+  .field-input-icon {
+    @apply pl-10;
+  }
+
+  /* Error state — toggled via [class.field-input-error] */
+  .field-input-error {
+    border-color: var(--color-danger);
+  }
+
+  /* ── Icon slot ───────────────────────────────────────────────────────────── */
+
+  .field-icon {
+    @apply absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors duration-200;
+    color: var(--color-text-subtle);
+  }
+
+  /* Activated via peer-focus in templates: class="field-icon peer-focus:text-primary" */
+
+  /* ── Form-field labels / messages ────────────────────────────────────────── */
+
+  .field-label {
+    @apply text-xs font-semibold uppercase tracking-[0.06em];
+    color: var(--color-text-muted);
+  }
+
+  .field-error-msg {
+    @apply text-xs;
+    color: var(--color-danger);
+  }
+
+  .field-hint-msg {
+    @apply text-xs;
+    color: var(--color-text-subtle);
+  }
+
+  /* ── Button base ─────────────────────────────────────────────────────────── */
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl text-base font-bold tracking-[0.04em]
+    border-none cursor-pointer relative overflow-hidden whitespace-nowrap
+    transition-[transform,box-shadow,opacity] duration-200 ease-in-out;
+    padding: 0.8rem 1.25rem;
+    font-family: var(--font-sans), sans-serif;
+  }
+
+  /* Sheen overlay */
+  .btn::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(135deg, #ffffff14, transparent);
+    border-radius: inherit;
+  }
+
+  .btn:hover:not(:disabled) { @apply -translate-y-px; }
+  .btn:active:not(:disabled) { @apply translate-y-0; }
+
+  .btn:disabled {
+    @apply opacity-[0.45] cursor-not-allowed translate-y-0;
+  }
+
+  .btn-full { @apply w-full; }
+
+  /* ── Button variants ─────────────────────────────────────────────────────── */
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #25a07d 100%);
+    color: var(--color-text-on-primary);
+    box-shadow: 0 4px 20px #2db89133;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 6px 28px #2db89150;
+  }
+
+  .btn-secondary {
+    background: var(--color-secondary);
+    color: var(--color-text-on-secondary);
+    box-shadow: 0 4px 12px #00000030;
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--color-secondary-hover);
+    box-shadow: 0 6px 18px #00000040;
+  }
+
+  .btn-danger {
+    background: linear-gradient(135deg, var(--color-danger) 0%, #c44040 100%);
+    color: var(--color-text-on-danger);
+    box-shadow: 0 4px 20px #e0525233;
+  }
+
+  .btn-danger:hover:not(:disabled) {
+    box-shadow: 0 6px 28px #e0525250;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent shadow-none;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-stroke);
+  }
+
+  .btn-ghost::after { @apply hidden; }
+
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-surface-raised);
+    color: var(--color-text);
+    border-color: var(--color-stroke-strong);
+  }
+
+  /* ── Checkbox ────────────────────────────────────────────────────────────── */
+
+  .check-box {
+    @apply size-[18px] shrink-0 flex items-center justify-center rounded-md
+    transition-[border-color,background] duration-150;
+    border: 2px solid var(--color-stroke-strong);
+    background: var(--color-input);
+  }
+
+  .check-box-checked {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .check-mark {
+    @apply text-xs leading-none font-bold;
+    color: var(--color-text-on-primary);
+  }
+
+  .check-label {
+    @apply text-sm font-normal cursor-pointer;
+    color: var(--color-text-muted);
+  }
+
+  .check-label a {
+    @apply no-underline;
+    color: var(--color-primary);
+  }
+
+  .check-label a:hover {
+    @apply underline;
+  }
+
+  /* ── Phone input ─────────────────────────────────────────────────────────── */
+
+  .phone-wrap {
+    @apply flex items-center rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-200;
+    background: var(--color-input);
+    border: 1px solid var(--color-stroke);
+  }
+
+  .phone-wrap:focus-within {
+    border-color: var(--color-focus-ring);
+    box-shadow: var(--shadow-focus-ring);
+  }
+
+  .phone-wrap-error {
+    border-color: var(--color-danger);
+  }
+
+  .phone-prefix {
+    @apply text-sm font-semibold border-none outline-none cursor-pointer shrink-0
+    appearance-none transition-colors duration-200;
+    background: var(--color-surface-raised);
+    color: var(--color-text-muted);
+    font-family: var(--font-body), sans-serif;
+    padding: 0.7rem 0.6rem 0.7rem 0.75rem;
+  }
+
+  .phone-prefix:focus { color: var(--color-text); }
+  .phone-prefix:disabled { @apply opacity-50 cursor-not-allowed; }
+
+  .phone-divider {
+    @apply w-px self-stretch shrink-0;
+    background: var(--color-stroke);
+  }
+
+  .phone-number {
+    @apply flex-1 bg-transparent border-none text-sm outline-none;
+    padding: 0.7rem 0.9rem;
+    color: var(--color-text);
+    font-family: var(--font-body), sans-serif;
+  }
+
+  .phone-number::placeholder { color: var(--color-text-subtle); }
+  .phone-number:disabled { @apply opacity-50 cursor-not-allowed; }
+
+}

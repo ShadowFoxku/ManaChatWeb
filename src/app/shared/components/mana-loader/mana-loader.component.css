@@ -1,0 +1,133 @@
+/* ── Host wrapper ─────────────────────────────────────────────────── */
+.gem-loader-host {
+  /* Tailwind v4: reference custom tokens directly as CSS vars */
+  color: var(--color-primary);
+
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  /* Uniform size scaling via --loader-size (set by [style] binding) */
+  width: var(--loader-size, 120px);
+}
+
+/* ── Aura ring ────────────────────────────────────────────────────── */
+.aura-ring {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(
+      ellipse at 50% 60%,
+      color-mix(in srgb, var(--color-primary) 22%, transparent),
+      transparent 70%
+  );
+  animation: aura-pulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes aura-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.92); }
+  50%       { opacity: 1;   transform: scale(1.08); }
+}
+
+/* ── Gem SVG ──────────────────────────────────────────────────────── */
+.gem-svg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  animation: gem-float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-primary) 60%, transparent));
+}
+
+@keyframes gem-float {
+  0%, 100% { transform: translateY(0)    rotate(0deg);   }
+  25%       { transform: translateY(-4%) rotate(0.8deg);  }
+  75%       { transform: translateY(3%)  rotate(-0.8deg); }
+}
+
+/* ── Facet animations ─────────────────────────────────────────────── */
+
+/* Each facet pulses its opacity on a staggered timeline */
+.facet {
+  animation: facet-breathe 3s ease-in-out infinite;
+  transform-origin: 100px 100px; /* gem centre */
+}
+
+.facet-crown  { animation-delay: 0s;    }
+.facet-tl     { animation-delay: 0.3s;  }
+.facet-tr     { animation-delay: 0.6s;  }
+.facet-left   { animation-delay: 0.9s;  }
+.facet-right  { animation-delay: 1.2s;  }
+
+@keyframes facet-breathe {
+  0%, 100% { opacity: var(--base-op, 1); filter: brightness(1);   }
+  50%       { opacity: calc(var(--base-op, 1) * 1.35); filter: brightness(1.25); }
+}
+
+/* Override each facet's natural base opacity so breathing scales from it */
+.facet-crown  { --base-op: 0.18; }
+.facet-tl     { --base-op: 0.55; }
+.facet-tr     { --base-op: 0.35; }
+.facet-left   { --base-op: 0.65; }
+.facet-right  { --base-op: 0.45; }
+
+/* Shimmer pass */
+.facet-shimmer {
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Outline traces along its own perimeter */
+.gem-outline {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation:
+    outline-draw 2s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    outline-loop 4s ease-in-out 2s infinite;
+}
+
+@keyframes outline-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes outline-loop {
+  0%, 100% { opacity: 0.85; filter: brightness(1);   }
+  50%       { opacity: 1;    filter: brightness(1.4); }
+}
+
+/* Inner lines fade-in with a gentle dance */
+.inner-line {
+  animation: inner-line-dance 5s ease-in-out infinite;
+}
+
+.inner-line:nth-child(1) { animation-delay: 0s;   }
+.inner-line:nth-child(2) { animation-delay: 0.7s; }
+.inner-line:nth-child(3) { animation-delay: 1.4s; }
+.inner-line:nth-child(4) { animation-delay: 2.1s; }
+
+@keyframes inner-line-dance {
+  0%, 100% { opacity: 0.3; }
+  40%       { opacity: 0.7; }
+  70%       { opacity: 0.15; }
+}
+
+/* ── Label ────────────────────────────────────────────────────────── */
+.loader-label {
+  font-family: inherit;
+  font-size: calc(var(--loader-size, 120px) * 0.12);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  opacity: 0.75;
+  animation: label-fade 2s ease-in-out infinite;
+  white-space: nowrap;
+  user-select: none;
+}
+
+@keyframes label-fade {
+  0%, 100% { opacity: 0.55; }
+  50%       { opacity: 0.9;  }
+}

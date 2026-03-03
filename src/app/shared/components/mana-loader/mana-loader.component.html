@@ -1,0 +1,117 @@
+<div class="gem-loader-host" [ngStyle]="hostStyles()" role="status" [attr.aria-label]="label()">
+
+  <!-- Ambient outer aura ring -->
+  <div class="aura-ring"></div>
+
+  <!-- The gem SVG — facets animate independently -->
+  <svg
+    class="gem-svg"
+    viewBox="0 0 200 200"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <!-- Defs: shimmer gradient -->
+    <defs>
+      <linearGradient id="shimmer" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stop-color="var(--color-primary)" stop-opacity="0"/>
+        <stop offset="45%"  stop-color="var(--color-text-on-primary)" stop-opacity="0.35"/>
+        <stop offset="55%"  stop-color="var(--color-text-on-primary)" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0"/>
+        <animateTransform
+          attributeName="gradientTransform"
+          type="translate"
+          from="-1 0"
+          to="2 0"
+          dur="2.4s"
+          repeatCount="indefinite"
+          additive="sum"
+        />
+      </linearGradient>
+
+      <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="3.5" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Crown fill -->
+    <polygon
+      class="facet facet-crown"
+      points="55,72 145,72 170,105 100,185 30,105"
+      fill="currentColor"
+      opacity="0.18"
+    />
+
+    <!-- Top-left bezel -->
+    <polygon
+      class="facet facet-tl"
+      points="100,18 55,72 100,72"
+      fill="currentColor"
+      opacity="0.55"
+    />
+    <!-- Top-right bezel -->
+    <polygon
+      class="facet facet-tr"
+      points="100,18 145,72 100,72"
+      fill="currentColor"
+      opacity="0.35"
+    />
+
+    <!-- Left pavilion -->
+    <polygon
+      class="facet facet-left"
+      points="30,105 55,72 100,185"
+      fill="currentColor"
+      opacity="0.65"
+    />
+    <!-- Right pavilion -->
+    <polygon
+      class="facet facet-right"
+      points="170,105 145,72 100,185"
+      fill="currentColor"
+      opacity="0.45"
+    />
+
+    <!-- Shimmer overlay on all facets -->
+    <polygon
+      class="facet-shimmer"
+      points="100,18 145,72 170,105 100,185 30,105 55,72"
+      fill="url(#shimmer)"
+    />
+
+    <!-- Outline -->
+    <polygon
+      class="gem-outline"
+      points="100,18 145,72 170,105 100,185 30,105 55,72"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+      opacity="0.85"
+      filter="url(#glow)"
+    />
+
+    <!-- Table edge -->
+    <line
+      class="inner-line"
+      x1="55" y1="72" x2="145" y2="72"
+      stroke="currentColor" stroke-width="1" opacity="0.5"
+    />
+
+    <!-- Inner structural lines -->
+    <line class="inner-line" x1="100" y1="18" x2="100" y2="185"
+          stroke="currentColor" stroke-width="0.8" opacity="0.3"/>
+    <line class="inner-line" x1="55"  y1="72" x2="100" y2="185"
+          stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+    <line class="inner-line" x1="145" y1="72" x2="100" y2="185"
+          stroke="currentColor" stroke-width="0.6" opacity="0.3"/>
+  </svg>
+
+  <!-- Label -->
+  @if(label()) {
+    <span class="loader-label">{{ label() }}</span>
+  }
+</div>

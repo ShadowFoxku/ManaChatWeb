@@ -1,0 +1,38 @@
+// ── Form field spacing ──
+app-form-field {
+  display: block;
+  margin-bottom: 1.1rem;
+}
+
+// ── Form title ──
+.form-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.03em;
+}
+
+// ── Forgot link ──
+.forgot {
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+  }
+}
+
+// ── Card footer links ──
+.card-footer {
+  a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}

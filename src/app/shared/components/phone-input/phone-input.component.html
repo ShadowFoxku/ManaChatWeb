@@ -1,0 +1,32 @@
+<div class="phone-wrap" [class.phone-wrap-error]="hasError()">
+
+  <select
+    class="phone-prefix"
+    [name]="name() + 'Prefix'"
+    [(ngModel)]="prefix"
+    (ngModelChange)="emit()"
+    (blur)="onTouched()"
+    [disabled]="isDisabled"
+    aria-label="Country code"
+  >
+    @for (p of prefixes; track p.code) {
+      <option [value]="p.code">{{ p.flag }} {{ p.label }}</option>
+    }
+  </select>
+
+  <div class="phone-divider" aria-hidden="true"></div>
+
+  <input
+    type="tel"
+    [id]="id()"
+    [name]="name()"
+    class="phone-number"
+    placeholder="555 555 5555"
+    [(ngModel)]="number"
+    (ngModelChange)="emit()"
+    (blur)="onTouched()"
+    [disabled]="isDisabled"
+    pattern="^[\d\s\-\(\)]+$"
+  />
+
+</div>

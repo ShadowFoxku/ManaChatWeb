@@ -1,0 +1,59 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+
+  <div class="form-title">Welcome back</div>
+  <div class="text-[0.85rem] text-[var(--color-text-muted)] mb-7 font-light">Sign in to continue</div>
+
+  <!-- Username or Email -->
+  <app-form-field
+    label="Username or Email"
+    forId="usernameOrEmail"
+    [error]="usernameOrEmail.touched && usernameOrEmail.errors?.['required'] ? 'Username or email is required' : ''"
+  >
+    <app-text-input
+      id="usernameOrEmail"
+      name="usernameOrEmail"
+      placeholder="manauser"
+      icon="@"
+      [(ngModel)]="model.usernameOrEmail"
+      required
+      #usernameOrEmail="ngModel"
+      [hasError]="usernameOrEmail.invalid && usernameOrEmail.touched"
+    />
+  </app-form-field>
+
+  <!-- Password -->
+  <app-form-field
+    forId="password"
+    [error]="password.touched && password.errors?.['required'] ? 'Password is required' : ''"
+  >
+    <div class="flex items-center justify-between mb-[0.4rem]">
+      <label for="password" class="field-label">Password</label>
+      <a class="forgot" routerLink="/auth/forgot">Forgot?</a>
+    </div>
+    <app-password-input
+      id="password"
+      name="password"
+      [(ngModel)]="model.password"
+      required
+      #password="ngModel"
+      [hasError]="password.invalid && password.touched"
+      [showStrength]="false"
+    />
+  </app-form-field>
+
+  <app-button
+    type="submit"
+    variant="primary"
+    [fullWidth]="true"
+    [disabled]="loginForm.invalid"
+    [loading]="isLoading()"
+  >
+    Sign In
+  </app-button>
+
+  <div class="text-center mt-5 text-[0.82rem] text-[var(--color-text-subtle)] card-footer">
+    Don't have an account?
+    <a routerLink="/auth/register">Create one</a>
+  </div>
+
+</form>
