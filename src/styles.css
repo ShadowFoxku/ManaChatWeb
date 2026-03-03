@@ -353,7 +353,6 @@
   }
 
   /* ── Phone input ─────────────────────────────────────────────────────────── */
-
   .phone-wrap {
     @apply flex items-center rounded-lg overflow-hidden transition-[border-color,box-shadow] duration-200;
     background: var(--color-input);
@@ -395,5 +394,4 @@
 
   .phone-number::placeholder { color: var(--color-text-subtle); }
   .phone-number:disabled { @apply opacity-50 cursor-not-allowed; }
-
 }
