@@ -11,7 +11,6 @@
 .toast {
   padding: 0.75rem 1.25rem;
   border-radius: var(--radius-md, 6px);
-  font-size: var(--text-sm, 0.875rem);
   background: var(--color-surface-overlay, #333);
   box-shadow: var(--shadow-md, 0 4px 12px rgba(0,0,0,0.15));
   min-width: 200px;
@@ -19,6 +18,14 @@
 
   /* animation */
   animation: toast-in 150ms ease-out;
+}
+
+.toast-title {
+  font-size: var(--text-lg, 14px);
+}
+
+.toast-body {
+  font-size: var(--text-sm, 0.875rem);
 }
 
 .toast.success {

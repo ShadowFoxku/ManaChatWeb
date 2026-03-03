@@ -16,6 +16,8 @@ import {ManaLoaderComponent} from '../../../shared/components/mana-loader/mana-l
 import {AuthService} from '../../../core/services/auth.service';
 import {finalize} from 'rxjs';
 import {PageLoader} from '../../../shared/components/page-loader/page-loader';
+import {ManaToastService} from '../../../core/services/mana-toast.service';
+import {AppError} from '../../../core/models/http-error.model';
 
 @Component({
   selector: 'app-register',
@@ -41,6 +43,7 @@ export class RegisterComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private toast = inject(ManaToastService);
 
   config = signal<Config | null>(null);
   configError = signal(false);
@@ -88,6 +91,7 @@ export class RegisterComponent implements OnInit {
       },
       error: () => {
         this.configError.set(true);
+        this.toast.error("There was an error loading config from the server. Please try again later.", "Registration not available.", 45000);
       },
     });
   }
@@ -132,10 +136,12 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.username.value, this.password?.value, this.email?.value, this.phone?.value)
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.isSubmitting.set(false)))
       .subscribe({
-        next: (cfg) => {
-
+        next: () => {
+          this.router.navigate(["auth/login"]);
         },
-        error: () => {}
-      })
+        error: (err: AppError) => {
+          this.toast.error(err.message, "Registration failed.")
+        }
+      });
   }
 }

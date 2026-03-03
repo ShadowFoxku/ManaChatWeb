@@ -1,5 +1,12 @@
 <div class="toast-container">
   @for (toast of toastService.toasts(); track toast.id) {
-    <div class="toast" [class]="toast.type">{{ toast.message }}</div>
+    <div class="toast" [class]="toast.type">
+      @if(toast.title) {
+        <div class="toast-title mb-2">{{ toast.title }}</div>
+      }
+      <div class="toast-body">
+        {{ toast.message }}
+      </div>
+    </div>
   }
 </div>

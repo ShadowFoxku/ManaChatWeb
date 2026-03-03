@@ -10,6 +10,6 @@ export class AuthService {
 
   public register(username: string, password: string, email: string, phoneNumber: string): Observable<any> {
     let body = { username, password, email, phoneNumber };
-    return this.httpService.post('users/register', body)
+    return this.httpService.post<any>('user', body)
   }
 }
