@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, input, output} from '@angular/core';
 import { NgClass } from '@angular/common';
 import {ManaLoaderComponent} from '../mana-loader/mana-loader.component';
+import {share} from 'rxjs';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
 export type ButtonType    = 'button' | 'submit' | 'reset';
@@ -28,4 +29,36 @@ export class ButtonComponent {
     if (this.disabled()) return;
     this.clicked.emit(event);
   }
+
+  get loaderColor(): string | null {
+    switch(this.variant()) {
+      case 'primary':
+        return '--color-text-on-primary';
+      case 'secondary':
+        return '--color-text-on-secondary';
+      case 'danger':
+        return '--color-text-on-danger';
+      case 'ghost':
+          return '--color-text';
+      default:
+        return null;
+    }
+  }
+
+  get loaderShimmerColor(): string | null {
+    switch(this.variant()) {
+      case 'primary':
+        return '--color-text-primary';
+      case 'secondary':
+        return '--color-text-on-secondary';
+      case 'danger':
+        return '--color-text-on-danger';
+      case 'ghost':
+        return '--color-text-muted';
+      default:
+        return null;
+    }
+  }
+
+  protected readonly share = share;
 }

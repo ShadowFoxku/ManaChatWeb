@@ -137,6 +137,7 @@ export class RegisterComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.isSubmitting.set(false)))
       .subscribe({
         next: () => {
+          this.toast.success("Registered successfully! Please log in to continue.", "Success!", 7500);
           this.router.navigate(["auth/login"]);
         },
         error: (err: AppError) => {

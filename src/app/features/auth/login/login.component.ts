@@ -5,6 +5,7 @@ import {FormFieldComponent} from '../../../shared/components/form-field/form-fie
 import {TextInputComponent} from '../../../shared/components/text-input/text-input.component';
 import {PasswordInputComponent} from '../../../shared/components/password-input/password-input.component';
 import {ButtonComponent} from '../../../shared/components/button/button.component';
+import {PageLoader} from '../../../shared/components/page-loader/page-loader';
 
 interface LoginModel {
   usernameOrEmail: string;
@@ -21,6 +22,7 @@ interface LoginModel {
     TextInputComponent,
     PasswordInputComponent,
     ButtonComponent,
+    PageLoader,
   ],
   templateUrl: './login.component.html',
   styleUrl: '../auth.forms.style.scss',

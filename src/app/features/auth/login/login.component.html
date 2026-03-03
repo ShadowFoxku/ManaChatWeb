@@ -1,3 +1,7 @@
+@if (isLoading()) {
+  <app-page-loader label="Logging in..." />
+}
+
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
 
   <div class="form-title">Welcome back</div>

@@ -5,7 +5,7 @@
   (click)="onClick($event)"
 >
   @if (loading()) {
-    <app-mana-loader [size]="18" label=""></app-mana-loader>
+    <app-mana-loader [size]="18" label="" [color]="loaderColor" [shimmerColor]="loaderShimmerColor"></app-mana-loader>
   } @else {
     <ng-content />
   }
