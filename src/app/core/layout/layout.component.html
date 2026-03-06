@@ -1,0 +1,41 @@
+<header class="mobile-header hidden h-12 flex-shrink-0 items-center gap-3 px-3" style="background: var(--color-surface); border-bottom: 1px solid var(--color-stroke);">
+  <button
+    class="flex h-9 w-9 flex-shrink-0 cursor-pointer items-center justify-center rounded-xl border-none"
+    style="background: var(--color-primary); color: var(--color-text-muted);"
+    (click)="toggleMobile()"
+    aria-label="Open navigation"
+  >
+    <img src="icon.svg" />
+  </button>
+  <span class="mobile-header-title flex-1 text-center font-bold" style="color: var(--color-text);">
+    ManaChat
+  </span>
+</header>
+
+<div class="app-shell flex flex-1 overflow-hidden" [class.mobile-open]="mobileOpen()">
+
+  @if (mobileOpen()) {
+    <div
+      class="mobile-backdrop fixed inset-0 z-[25]"
+      style="background: rgba(0,0,0,0.6);"
+      (click)="toggleMobile()"
+    ></div>
+  }
+
+  <app-outer-rail
+    [railCollapsed]="railCollapsed()"
+    [activePanelView]="activePanelView()"
+    (toggleRail)="toggleRail()"
+    (panelViewChange)="activePanelView.set($event)"
+  />
+
+  <app-inner-rail
+    [view]="activePanelView()"
+    [activeInstanceId]="activeInstanceId()"
+  />
+
+  <main class="relative flex flex-1 flex-col overflow-hidden" style="background: var(--color-bg);">
+    <router-outlet />
+  </main>
+
+</div>

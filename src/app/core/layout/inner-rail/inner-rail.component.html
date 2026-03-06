@@ -1,0 +1,104 @@
+<aside
+  class="inner-rail relative flex w-60 flex-shrink-0 flex-col overflow-hidden"
+  style="background: var(--color-surface); border-right: 1px solid var(--color-stroke);"
+  [class.collapsed]="panelCollapsed()"
+  [style.width]="panelCollapsed() ? '0' : ''"
+>
+
+  @if (view() === 'channels') {
+    <div>TODO</div>
+  } @else {
+
+    <!-- Header -->
+    <div
+      class="flex h-12 flex-shrink-0 items-center justify-between px-3"
+      style="border-bottom: 1px solid var(--color-stroke);"
+    >
+      <span class="text-sm font-bold whitespace-nowrap" style="color: var(--color-text);">
+        Messages
+      </span>
+      <button
+        class="panel-collapse-btn flex h-6 w-6 flex-shrink-0 cursor-pointer items-center justify-center rounded-md border-none bg-transparent"
+        style="color: var(--color-text-subtle);"
+        (click)="togglePanel()"
+        title="Collapse"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Scroll area -->
+    <div class="panel-scroll flex-1 overflow-x-hidden overflow-y-auto pb-3">
+
+      <!-- Section label -->
+      <div
+        class="section-label flex items-center justify-between px-3 pb-1 pt-4 font-bold uppercase tracking-widest"
+        style="color: var(--color-text-subtle);"
+      >
+        Recent
+      </div>
+
+      @for (convo of conversations(); track convo.id) {
+        <a
+          class="convo-row mx-1.5 my-px flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 no-underline"
+          [routerLink]="['/messages', convo.id]"
+          routerLinkActive="active"
+        >
+          <!-- Avatar -->
+          <div class="relative flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+            <span class="convo-initials text-xs font-bold" style="color: #0f1412;">
+              {{ convo.name | slice:0:2 | uppercase }}
+            </span>
+            <span
+              class="presence-dot absolute -bottom-px -right-px h-2.5 w-2.5 rounded-full"
+              style="border: 2px solid var(--color-surface);"
+              [style.background]="presenceColor(convo.presence)"
+            ></span>
+          </div>
+
+          <!-- Info -->
+          <div class="flex min-w-0 flex-1 flex-col gap-0.5">
+            <span
+              class="convo-name overflow-hidden text-ellipsis whitespace-nowrap text-xs font-medium"
+              style="color: var(--color-text-muted);"
+            >
+              {{ convo.name }}
+            </span>
+            <span
+              class="overflow-hidden text-ellipsis whitespace-nowrap text-xs"
+              style="color: var(--color-text-subtle);"
+            >
+              {{ convo.preview }}
+            </span>
+          </div>
+
+          <!-- Meta -->
+          <div class="flex flex-shrink-0 flex-col items-end gap-1">
+            <span class="convo-time text-xs" style="color: var(--color-text-subtle);">
+              {{ convo.time }}
+            </span>
+          </div>
+        </a>
+      }
+
+    </div>
+
+  }
+
+  <!-- Restore tab — visible when collapsed -->
+  @if (panelCollapsed()) {
+    <button
+      class="restore-btn absolute top-3 flex h-6 w-6 cursor-pointer items-center justify-center rounded-r-lg border-y border-r border-l-0 bg-transparent"
+      style="background: var(--color-surface); border-color: var(--color-stroke); color: var(--color-text-muted);"
+      (click)="togglePanel()"
+      title="Expand panel"
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+  }
+
+</aside>

@@ -1,0 +1,58 @@
+:host {
+  display: contents;
+}
+
+/* Width transition */
+.outer-rail {
+  z-index: 20;
+  transition: width 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.outer-rail.collapsed { width: 48px; }
+
+/* Rail icon transitions & active shape */
+.rail-icon {
+  transition: background 200ms, color 200ms, border-radius 200ms;
+}
+.rail-icon:hover,
+.rail-icon.active {
+  border-radius: 14px;
+}
+
+/* Messages icon colours */
+.messages-icon:hover,
+.messages-icon.active {
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+}
+
+/* Active indicator pill */
+.rail-icon.active::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  width: 4px;
+  height: 65%;
+  border-radius: 0 3px 3px 0;
+}
+.messages-icon.active::before { background: var(--color-accent); }
+.instance-icon.active::before { background: var(--color-primary); }
+
+/* User avatar hover shape */
+.user-avatar { transition: border-radius 200ms; }
+.user-avatar-wrap:hover .user-avatar { border-radius: 12px; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .outer-rail {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    z-index: 30;
+    transform: translateX(-100%);
+    transition: transform 240ms cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid var(--color-stroke-strong);
+  }
+
+  :host-context(.app-shell.mobile-open) .outer-rail {
+    transform: translateX(0);
+  }
+}

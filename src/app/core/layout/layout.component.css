@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Mobile header: hidden by default, flex on small screens */
+@media (max-width: 768px) {
+  .mobile-header { display: flex; }
+}
+
+/* Mobile header title font size sits between Tailwind steps */
+.mobile-header-title { font-size: 15px; }
+
+.mobile-backdrop { animation: fadeIn 240ms ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

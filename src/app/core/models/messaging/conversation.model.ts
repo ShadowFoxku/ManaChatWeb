@@ -4,4 +4,6 @@ export default interface Conversation {
   preview: string;
   time: string;
   unread?: number;
+  presence: string;
+  name: string;
 }

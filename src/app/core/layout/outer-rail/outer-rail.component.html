@@ -1,0 +1,38 @@
+<nav
+  class="outer-rail relative flex flex-shrink-0 flex-col items-center gap-1 py-2"
+  style="width: 64px; background: var(--color-bg); border-right: 1px solid var(--color-stroke);"
+  [class.collapsed]="railCollapsed()"
+>
+  <!-- Messages shortcut -->
+  <button
+    class="rail-icon messages-icon relative flex h-10 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full border-none text-sm font-bold"
+    [class.active]="activePanelView() === 'messages'"
+    title="Messages"
+    (click)="panelViewChange.emit('messages')"
+  >
+    <img src="icon.svg" />
+  </button>
+
+  <div class="my-1 h-px w-8 flex-shrink-0" style="background: var(--color-stroke);"></div>
+
+  <!-- User panel -->
+  <div class="user-panel relative mt-auto flex flex-col items-center pb-1">
+    <div class="user-avatar-wrap relative cursor-pointer" (click)="toggleUserCard()">
+      <div
+        class="user-avatar flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold"
+        style="background: var(--color-primary); color: #0f1412;"
+      >
+        R
+      </div>
+      <div
+        class="presence-dot absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full"
+        style="background: var(--color-presence-online); border: 2px solid var(--color-bg);"
+      ></div>
+    </div>
+
+    @if (userCardOpen()) {
+      <app-user-card />
+    }
+  </div>
+
+</nav>
