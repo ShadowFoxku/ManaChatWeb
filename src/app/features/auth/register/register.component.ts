@@ -9,15 +9,15 @@ import { PhoneInputComponent } from '../../../shared/components/phone-input/phon
 // import { CheckboxComponent } from '../../../shared/components/checkbox/checkbox.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 
-import {ConfigService} from '../../../core/services/config.service';
+import {ConfigService} from '../../../core/services/config/config.service';
 import {Config} from '../../../core/models/config.model';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {ManaLoaderComponent} from '../../../shared/components/mana-loader/mana-loader.component';
-import {AuthService} from '../../../core/services/auth.service';
 import {finalize} from 'rxjs';
 import {PageLoader} from '../../../shared/components/page-loader/page-loader';
-import {ManaToastService} from '../../../core/services/mana-toast.service';
+import {ManaToastService} from '../../../core/services/mana-toast/mana-toast.service';
 import {AppError} from '../../../core/models/http-error.model';
+import {AuthService} from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-register',

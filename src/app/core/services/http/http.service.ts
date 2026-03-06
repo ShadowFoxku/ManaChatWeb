@@ -7,8 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {environment} from '../../../environments/environment';
-import {AppError} from '../models/http-error.model';
+import {environment} from '../../../../environments/environment';
+import {AppError} from '../../models/http-error.model';
 
 export interface RequestOptions {
   headers?: Record<string, string>;
@@ -106,13 +106,13 @@ export class HttpService {
 
   private extractMessage(error: HttpErrorResponse): string {
     const body = error.error;
-
     if (error.error instanceof ErrorEvent) return error.error.message;
 
     if (typeof body === 'string' && body.trim()) return body;
 
     if (typeof body === 'object' && body !== null) {
       if (body.message) return body.message;
+      if (body.Message) return body.Message;
       if (body.error) return body.error;
       if (body.errors) {
         const first = (Object.values(body.errors).flat() as string[])[0];

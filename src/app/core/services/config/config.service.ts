@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Observable, of, tap} from 'rxjs';
-import {Config} from '../models/config.model';
-import {HttpService} from './http.service';
+import {Config} from '../../models/config.model';
+import {HttpService} from '../http/http.service';
 
 @Injectable({ providedIn: 'root' })
 export class ConfigService {

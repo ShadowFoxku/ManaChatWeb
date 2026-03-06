@@ -1,11 +1,16 @@
-import {Component, signal} from '@angular/core';
+import {Component, DestroyRef, inject, signal} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {FormFieldComponent} from '../../../shared/components/form-field/form-field.component';
 import {TextInputComponent} from '../../../shared/components/text-input/text-input.component';
 import {PasswordInputComponent} from '../../../shared/components/password-input/password-input.component';
 import {ButtonComponent} from '../../../shared/components/button/button.component';
 import {PageLoader} from '../../../shared/components/page-loader/page-loader';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {ManaToastService} from '../../../core/services/mana-toast/mana-toast.service';
+import {AppError} from '../../../core/models/http-error.model';
+import {finalize} from 'rxjs';
+import {AuthService} from '../../../core/auth/auth.service';
 
 interface LoginModel {
   usernameOrEmail: string;
@@ -33,12 +38,25 @@ export class LoginComponent {
     password: '',
   };
 
+  private authService = inject(AuthService);
+  private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
+  private toast = inject(ManaToastService);
+
   isLoading = signal(false);
 
   onSubmit(form: NgForm): void {
     if (form.invalid) return;
     this.isLoading.set(true);
-    // TODO: wire to AuthService
-    console.log('Login submitted:', this.model);
+    this.authService.login(this.model.usernameOrEmail, this.model.password)
+      .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/chat']);
+        },
+        error: (err: AppError) => {
+          this.toast.error(err.message, "Login failed.")
+        }
+      });
   }
 }

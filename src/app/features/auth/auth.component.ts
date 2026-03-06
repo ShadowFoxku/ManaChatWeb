@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import {HttpService} from '../../core/services/http.service';
+import {HttpService} from '../../core/services/http/http.service';
 
 @Component({
   selector: 'app-auth',
