@@ -52,7 +52,7 @@ export class LoginComponent {
       .pipe(takeUntilDestroyed(this.destroyRef), finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: () => {
-          this.router.navigate(['/chat']);
+          this.router.navigate(['/contacts']);
         },
         error: (err: AppError) => {
           this.toast.error(err.message, "Login failed.")

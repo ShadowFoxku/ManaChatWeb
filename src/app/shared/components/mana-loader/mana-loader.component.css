@@ -123,6 +123,11 @@
   user-select: none;
 }
 
+.loader-holder {
+  display: flex;
+  background-color: rgba(var(--color-bg) / 1);
+}
+
 @keyframes label-fade {
   0%, 100%  { opacity: 0.55; }
   50%       { opacity: 0.9;  }

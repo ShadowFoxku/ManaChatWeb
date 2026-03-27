@@ -1,5 +1,5 @@
 export interface Config {
-  InstanceName: string;
+  ServerName: string;
   Users: UserConfig;
 }
 

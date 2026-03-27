@@ -3,16 +3,19 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SlicePipe, UpperCasePipe } from '@angular/common';
 import { PanelView } from '../layout.component';
 import { ConversationsService } from '../../services/conversations/conversations.service';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucidePanelLeftClose, lucideUserCog } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-inner-rail',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, SlicePipe, UpperCasePipe],
+  imports: [RouterLink, RouterLinkActive, SlicePipe, UpperCasePipe, NgIcon],
+  providers: [provideIcons({ lucidePanelLeftClose })],
   templateUrl: './inner-rail.component.html',
   styleUrl: './inner-rail.component.css',
 })
 export class InnerRailComponent {
-  view             = input.required<PanelView>();
+  view = input.required<PanelView>();
   activeInstanceId = input<number | null>(null);
 
   panelCollapsed = signal(false);
@@ -22,15 +25,19 @@ export class InnerRailComponent {
   conversations = this.conversationsService.conversations;
 
   togglePanel(): void {
-    this.panelCollapsed.update(v => !v);
+    this.panelCollapsed.update((v) => !v);
   }
 
   presenceColor(presence?: string): string {
     switch (presence) {
-      case 'online':  return 'var(--color-presence-online)';
-      case 'idle':    return 'var(--color-presence-idle)';
-      case 'dnd':     return 'var(--color-presence-dnd)';
-      default:        return 'var(--color-presence-offline)';
+      case 'online':
+        return 'var(--color-presence-online)';
+      case 'idle':
+        return 'var(--color-presence-idle)';
+      case 'dnd':
+        return 'var(--color-presence-dnd)';
+      default:
+        return 'var(--color-presence-offline)';
     }
   }
 }

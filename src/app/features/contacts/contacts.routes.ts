@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
-export const CHAT_ROUTES: Routes = [
+export const CONTACTS_ROUTES: Routes = [
   {
-    path: '',
+    path: 'contacts',
     children: [
       {
         path: 'chat',
         loadComponent: () =>
-          import('./chat.component').then((m) => m.ChatComponent),
+          import('../chat/chat.component').then((m) => m.ChatComponent),
       },
       {
         path: '',

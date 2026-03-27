@@ -8,7 +8,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     component: LayoutComponent,
     loadChildren: () =>
-      import('./features/chat/chat.routes').then((m) => m.CHAT_ROUTES),
+      import('./features/contacts/contacts.routes').then((m) => m.CONTACTS_ROUTES),
   },
   {
     path: 'auth',
