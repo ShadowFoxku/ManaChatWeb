@@ -33,11 +33,11 @@ export class ButtonComponent {
   get loaderColor(): string | null {
     switch(this.variant()) {
       case 'primary':
-        return '--color-text-on-primary';
+        return '--color-on-primary';
       case 'secondary':
-        return '--color-text-on-secondary';
+        return '--color-on-secondary';
       case 'danger':
-        return '--color-text-on-danger';
+        return '--color-on-danger';
       case 'ghost':
           return '--color-text';
       default:
@@ -50,9 +50,9 @@ export class ButtonComponent {
       case 'primary':
         return '--color-text-primary';
       case 'secondary':
-        return '--color-text-on-secondary';
+        return '--color-on-secondary';
       case 'danger':
-        return '--color-text-on-danger';
+        return '--color-on-danger';
       case 'ghost':
         return '--color-text-muted';
       default:

@@ -1,5 +1,5 @@
-import {computed, Injectable, signal} from '@angular/core';
-import {ThemeName, ThemeTokens} from '../../models/theme.model';
+import { computed, Injectable, signal } from '@angular/core';
+import { ThemeName, ThemeTokens } from '../../models/theme.model';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -11,13 +11,13 @@ export class ThemeService {
   readonly customTokens = this._customTokens.asReadonly();
 
   constructor() {
-    this.apply(this._theme());
+    this.applyTheme(this._theme());
     this.applyCustomTokens(this._customTokens());
   }
 
   set(theme: ThemeName) {
     this._theme.set(theme);
-    this.apply(theme);
+    this.applyTheme(theme);
     localStorage.setItem('theme', theme);
   }
 
@@ -32,27 +32,24 @@ export class ThemeService {
   }
 
   clearCustomTokens() {
+    const root = document.documentElement;
+    // Remove only the keys we previously set — fixes the empty-object bug
+    for (const key of Object.keys(this._customTokens())) {
+      root.style.removeProperty(`--p-${key}`);
+    }
     this._customTokens.set({});
-    this.removeCustomTokens();
     localStorage.removeItem('custom-tokens');
   }
 
-  private apply(theme: ThemeName) {
+  private applyTheme(theme: ThemeName) {
     document.documentElement.setAttribute('data-theme', theme);
   }
 
   private applyCustomTokens(tokens: Partial<ThemeTokens>) {
     const root = document.documentElement;
     for (const [key, value] of Object.entries(tokens)) {
-      root.style.setProperty(`--${key}`, value);
-    }
-  }
-
-  private removeCustomTokens() {
-    const root = document.documentElement;
-    this.apply(this._theme());
-    for (const key of Object.keys({} as ThemeTokens)) {
-      root.style.removeProperty(`--${key}`);
+      // Targets --p-primary etc., which @theme inline passes through to utilities
+      root.style.setProperty(`--p-${key}`, value);
     }
   }
 

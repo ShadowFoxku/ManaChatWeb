@@ -19,6 +19,6 @@ export class ManaLoaderComponent {
   hostStyles = computed(() => ({
     '--loader-size': `${this.size()}px`,
     ...(this.color()        ? { '--color-primary':          this.color()!        } : {}),
-    ...(this.shimmerColor() ? { '--color-text-on-primary':  this.shimmerColor()! } : {}),
+    ...(this.shimmerColor() ? { '--color-on-primary':  this.shimmerColor()! } : {}),
   }));
 }
